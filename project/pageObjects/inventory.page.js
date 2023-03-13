@@ -1,54 +1,20 @@
-
-
 class InventoryPage {
 
-    get addBackpackBtn () {
-        return $("//*[@data-test=\"add-to-cart-sauce-labs-backpack\"]");
-    }
+    get addToCartBtn() {
+        return $$('.btn_inventory')
+      }
 
-    get addBikeLightBtn () {
-        return $('#add-to-cart-sauce-labs-bike-light');
-    }
+    async addAllItemsToCart() {
+        this.addToCartBtn.forEach((button) => {
+            button.click()
+        })
+    } 
 
-    get addRedTShirtBtn () {
-        return $('//*[@data-test=\"add-to-cart-test.allthethings()-t-shirt-(red)\"]');
-    }
-
-    get removeBikeLightBtn() {
-        return $('#remove-sauce-labs-bike-light')
-    }
-
-    get removeBackpackBtn() {
-        return $('//*[@id="remove-sauce-labs-backpack"]')
-    }
-
-    get removeRedTShirtBtn() {
-        return $('//*[@id="remove-test.allthethings()-t-shirt-(red)"]')
-    }
-
-    async addBackpackToCart() {
-        await this.addBackpackBtn.click()
-    }
-
-    async addBikeLightToCart() {
-        await this.addBikeLightBtn.click()
-    }
-
-    async addRedTShirtToCart() {
-        await this.addRedTShirtBtn.click()
-    }
-
-    async removeBackpack() {
-        await this.removeBackpackBtn.click()
-    }
-
-    async removeBikeLight() {
-        const removeBikeLightBtn = $('#remove-sauce-labs-bike-light').click()
-    }
-
-    async removeRedTShirt() {
-        await this.removeRedTShirtBtn.click()
-    }
+    async removeAllItemsFromCart() {
+        this.addToCartBtn.forEach((button) => {
+            button.click()
+        })
+    } 
       
     async assertCartCount(count) {
         const number = await $('//*[@id="shopping_cart_container"]/a/span')
@@ -61,34 +27,34 @@ class InventoryPage {
     }
 
     async getProductTitles() {
-        const itemTitles = [];
+        const itemTitles = []
         const titleElements = await browser.$$('.inventory_item_name');
         for (let i = 0; i < titleElements.length; i++) {
-          const title = await titleElements[i].getText();
-          itemTitles.push(title);
+          const title = await titleElements[i].getText()
+          itemTitles.push(title)
         }
         return itemTitles;
     }
 
     async getProductPrice() {
-        const itemPrices = [];
+        const itemPrices = []
         const priceElements = await browser.$$('.inventory_item_price');
         for (let i = 0; i < priceElements.length; i++) {
-            const price = await priceElements[i].getText();
-            itemPrices.push(price);
+            const price = await priceElements[i].getText()
+            itemPrices.push(price)
         }
         return itemPrices;
     }
 
     async getProductDescription() {
         const itemDescriptions = [];
-        const descriptionElements = await browser.$$('.inventory_item_desc');
+        const descriptionElements = await browser.$$('.inventory_item_desc')
         for (let i = 0; i < descriptionElements.length; i++) {
-            const description = await descriptionElements[i].getText();
-            itemDescriptions.push(description);
+            const description = await descriptionElements[i].getText()
+            itemDescriptions.push(description)
         }
-        return itemDescriptions;
+        return itemDescriptions
     }
 }
 
-export default new InventoryPage();
+export default new InventoryPage()

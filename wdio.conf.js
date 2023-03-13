@@ -8,6 +8,9 @@ export const config = {
     {
       maxInstances: 3,
       browserName: "firefox",
+      "moz:firefoxOptions": {
+        args: ["-headless"]
+      }
     },
     {
       browserName: "chrome",
